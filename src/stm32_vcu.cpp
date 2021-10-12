@@ -646,8 +646,6 @@ static void CanCallback(uint32_t id, uint32_t data[2]) //This is where we go whe
     case 0x2ef:
         i3LIMClass::handle2EF(data);// Data msg from LIM
         break;
-]
-
     default:
         if(targetVehicle == _vehmodes::BMW_E65)
         {
