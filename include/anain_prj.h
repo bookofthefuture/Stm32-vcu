@@ -6,6 +6,22 @@
 #define NUM_SAMPLES 12
 #define SAMPLE_TIME ADC_SMPR_SMP_7DOT5CYC
 
+// IF USING STMF103
+
+#define ANA_IN_LIST \
+   ANA_IN_ENTRY(throttle1, GPIOC, 1) \ // mapped to old throttle input
+   ANA_IN_ENTRY(throttle2, GPIOC, 0) \ // mapped to old throttle 2 input
+   ANA_IN_ENTRY(uaux,      GPIOC, 3) \ // mapped to old hv dc bus input - likely to need rescaling/different divider
+   ANA_IN_ENTRY(MG1_Temp,  GPIOC, 2) \ //mapped to old tmpm sensor
+   ANA_IN_ENTRY(MG2_Temp,  GPIOC, 4) \ // mapped to old tmphs sensor
+   ANA_IN_ENTRY(GP_analog1,GPIOB, 0) \ // mapped to old current sensor
+   ANA_IN_ENTRY(GP_analog2,GPIOA, 5) \ // mapped to old current sensor
+ 
+#endif // ANAIN_PRJ_H_INCLUDED
+
+
+/* IF USING STMF107
+
 #define ANA_IN_LIST \
     ANA_IN_ENTRY(throttle1, GPIOC, 0) \
    ANA_IN_ENTRY(throttle2, GPIOC, 1) \
@@ -16,3 +32,5 @@
    ANA_IN_ENTRY(MG2_Temp,  GPIOC, 5) \
 
 #endif // ANAIN_PRJ_H_INCLUDED
+
+/*
