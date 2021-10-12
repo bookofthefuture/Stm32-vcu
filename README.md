@@ -1,5 +1,5 @@
 # stm32-vcu-f103
-Project based on the OpenInverter System by Johannes Huebner to provide a universal VCU (Vehicle Control Unit) for electric vehicle conversion projects. Tweaked to run on stm32f103.
+Project based on the OpenInverter System by Johannes Huebner to provide a universal VCU (Vehicle Control Unit) for electric vehicle conversion projects. Tweaked to run on stm32f103-based Prius Gen 3 boards from EVBMW in order to provide canbus control to an Outlander Rear inverter.
 
 Please visit the development thread on the Openinverter Forum for more information : https://openinverter.org/forum/viewtopic.php?f=3&t=1277
 
