@@ -285,10 +285,10 @@ static void Ms200Task(void)
     {
    if((opmode != MOD_RUN) && (RunChg))  chargeMode = DigIo::HV_req.Get();//false; //this mode accepts a request for HV via a 12v inputfrom a charger controller e.g. Tesla Gen2/3 M3 PCS etc.
     if(!RunChg) chargeMode = false;
-
+/*
     if(RunChg) DigIo::SP_out.Set();//enable charger digital line. using sp out from gs450h as not used when in charge
     if(!RunChg) DigIo::SP_out.Clear();//disable charger digital line when requested by timer or webui.
-
+*/
     }
 
     ///////////////////////////////////////
@@ -318,7 +318,7 @@ static void Ms200Task(void)
     count_one++;
 if(count_one==1)    //just a dummy routine that sweeps the pots for testing.
 {
-    pot_test++;
+/*    pot_test++;
     DigIo::pot1_cs.Clear();
     DigIo::pot2_cs.Clear();
     uint8_t dummy=spi_xfer(SPI3,pot_test);//test
@@ -326,6 +326,7 @@ if(count_one==1)    //just a dummy routine that sweeps the pots for testing.
     DigIo::pot1_cs.Set();
     DigIo::pot2_cs.Set();
     count_one=0;
+*/
 }
 
 
@@ -425,7 +426,9 @@ static void Ms100Task(void)
 
     if(targetVehicle != _vehmodes::BMW_E65) //if not E65 then T15 via digital input.
     {
+      /*
       Param::SetInt(Param::T15Stat,DigIo::t15_digi.Get());
+      */
     }
 
     if(targetVehicle==VAG) Can_VAG::SendVAG100msMessage();
@@ -443,14 +446,17 @@ static void Ms100Task(void)
 
     if(targetChgint == _interface::Chademo) //Chademo on CAN3
     {
-        if(!DigIo::gp_12Vin.Get()) RunChaDeMo(); //if we detect chademo plug inserted off we go ...
-
+     /*   
+       if(!DigIo::gp_12Vin.Get()) RunChaDeMo(); //if we detect chademo plug inserted off we go ...
+     */
 
     }
 
 if(targetChgint != _interface::Chademo) //If we are not using Chademo then gp in can be used as a cabin heater request from the vehicle
 {
+   /*
     Param::SetInt(Param::HeatReq,DigIo::gp_12Vin.Get());
+    */
 }
 
 }
@@ -931,8 +937,9 @@ extern "C" int main(void)
     spi3_setup();
     parm_Change(Param::PARAM_LAST);
     DigIo::inv_out.Clear();//inverter power off during bootup
+/*
     DigIo::mcp_sby.Clear();//enable can3
-
+*/
 
     Can c(CAN1, (Can::baudrates)Param::GetInt(Param::canspeed));//can1 Inverter / isa shunt/LIM.
     Can c2(CAN2, (Can::baudrates)Param::GetInt(Param::canspeed));//can2 vehicle side.

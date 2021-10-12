@@ -19,8 +19,8 @@
     DIG_IO_ENTRY(gp_out2,     GPIOB, GPIO14, PinMode::OUTPUT)      \
     DIG_IO_ENTRY(gp_out3,     GPIOB, GPIO15, PinMode::OUTPUT)      \
     DIG_IO_ENTRY(brk_out,     GPIOA, GPIO9,  PinMode::OUTPUT)      \
-    DIG_IO_ENTRY(prec_out,    GPIOB, GPIO1,  PinMode::OUTPUT)     \
+    DIG_IO_ENTRY(prec_out,    GPIOB, GPIO1,  PinMode::OUTPUT)      \
     DIG_IO_ENTRY(inv_out,     GPIOA, GPIO8,  PinMode::OUTPUT)      \
-    DIG_IO_ENTRY(req_out,     GPIOA, GPIO10,  PinMode::OUTPUT)      \
+    DIG_IO_ENTRY(req_out,     GPIOA, GPIO10,  PinMode::OUTPUT)     \
 
 #endif // PinMode_PRJ_H_INCLUDED
