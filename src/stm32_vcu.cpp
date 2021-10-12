@@ -62,9 +62,7 @@ static volatile unsigned
 // Instantiate Classes
 BMW_E65Class E65Vehicle;
 chargerClass chgtype;
-//uCAN_MSG txMessage;
-uCAN_MSG rxMessage;
-CAN3_Msg CAN3;
+
 
 ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 static void Ms200Task(void)
@@ -716,9 +714,6 @@ extern "C" int main(void)
     c2.RegisterUserMessage(0x153);//E39/E46 ASC1 message
 
     can = &c; // FIXME: What about CAN2?
-
-//    CANSPI_Initialize();// init the MCP25625 on CAN3
-//    CANSPI_ENRx_IRQ();  //init CAN3 Rx IRQ
 
     Stm32Scheduler s(TIM3); //We never exit main so it's ok to put it on stack
     scheduler = &s;
