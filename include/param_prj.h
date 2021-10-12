@@ -163,9 +163,9 @@
 #define POTMODES     "0=Single, 1=DualChannel"
 #define BTNSWITCH    "0=Button, 1=Switch, 2=CAN"
 #define DIRMODES     "0=Button, 1=Switch, 2=ButtonReversed, 3=SwitchReversed, 4=DefaultForward"
-#define INVMODES     "0=Leaf_Gen1, 1=GS450H, 2=UserCAN, 3=OpenI, 4=Prius_Gen3"
+#define INVMODES     "0=UserCAN, 1=OpenI, 2=Prius_Gen3, 3=Outlander_Rear"
 #define PLTMODES     "0=Absent, 1=ACStd, 2=ACchg, 3=Error, 4=CCS_Not_Rdy, 5=CCS_Rdy, 6=Static"
-#define VEHMODES     "0=BMW_E46, 1=BMW_E65, 2=Classic, 3=None , 5=BMW_E39 , 6=VAG"
+#define VEHMODES     "0=BMW_E46, 1=BMW_E65, 2=Classic, 3=None , 5=BMW_E39 , 6=VAG, 7=BMW_Z3, 8=Mazda_MX5"
 //#define OPMODES      "0=Off, 1=Run, 2=ManualRun, 3=Boost, 4=Buck, 5=Sine, 6=AcHeat, 7=ChargeStart, 8=ConnectorLock, 9=Charge, 10=ChargeStop"
 #define OPMODES      "0=Off, 1=Run, 2=Precharge, 3=PchFail, 4=Charge"
 #define Dow         "0=Sun, 1=Mon, 2=Tue, 3=Wed, 4=Thu, 5=Fri, 6=Sat"
@@ -199,7 +199,7 @@
 #define CAT_CHARGER  "Charger Control"
 #define CHGMODS   "0=Off, 1=HV_ON, 2=EXT_CAN 3=EXT_DIGI, 4=Volt_Ampera"
 #define CHGCTRL   "0=Enable, 1=Disable, 2=Timer"
-#define CHGint   "0=Unused, 1=i3LIM, 2=Chademo, 3=Leaf_PDM"
+#define CHGint   "0=Unused, 1=i3LIM, 2=Chademo"
 #define CAN_PERIOD_100MS    0
 #define CAN_PERIOD_10MS     1
 
