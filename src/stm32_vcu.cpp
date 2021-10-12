@@ -53,8 +53,6 @@ uint8_t ChgMins_tmp;
 uint16_t ChgDur_tmp;
 uint8_t RTC_1Sec=0;
 uint32_t ChgTicks=0,ChgTicks_1Min=0;
-uint8_t CabHeater,CabHeater_ctrl;
-
 
 static volatile unsigned
 	days=0,
@@ -497,30 +495,6 @@ static void Ms10Task(void)
         if(targetVehicle == _vehmodes::BMW_E65) E65Vehicle.DashOff();
     }
 
-      //Cabin heat control
-    if((CabHeater_ctrl==1)&& (CabHeater==1)&&(opmode==MOD_RUN))//If we have selected an ampera heater are in run mode and heater not diabled...
-    {
-        DigIo::gp_out3.Set();//Heater enable and coolant pump on
-
-      if(Ampera_Not_Awake)
-      {
-         AmperaHeater::sendWakeup();
-         Ampera_Not_Awake=false;
-      }
-        //gp in used as heat request from car (E46 in case of testing). May be poss via CAN also...
-        if(!Ampera_Not_Awake) AmperaHeater::controlPower(Param::GetInt(Param::HeatPwr),Param::GetBool(Param::HeatReq));
-
-    };
-
-    if(CabHeater_ctrl==0 || opmode!=MOD_RUN)
-    {
-        DigIo::gp_out3.Clear();//Heater enable and coolant pump off
-        Ampera_Not_Awake=true;
-    }
-
-
-
-
 }
 
 
@@ -563,8 +537,6 @@ extern void parm_Change(Param::PARAM_NUM paramNum)
     targetChgint=static_cast<_interface>(Param::GetInt(Param::interface));//get interface setting from menu
     Param::SetInt(Param::Charger, targetCharger);//Confirm mode
     maxRevs=Param::GetInt(Param::revlim);//get revlimiter value
-    CabHeater=Param::GetInt(Param::Heater);//get cabin heater type
-    CabHeater_ctrl=Param::GetInt(Param::Control);//get cabin heater control mode
     if(ChgSet==1)
     {
     seconds=Param::GetInt(Param::Set_Sec);//only update these params if charge command is set to disable
