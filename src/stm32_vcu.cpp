@@ -204,11 +204,6 @@ static void Ms200Task(void)
 
     ///////////////////////////////////////
 
-
-
-       // if(opmode==MOD_CHARGE) DigIo::gp_out3.Set();//Chademo relay on for testing
-       // if(opmode!=MOD_CHARGE) DigIo::gp_out3.Clear();//Chademo relay off for testing
-
     count_one++;
 if(count_one==1)    //just a dummy routine that sweeps the pots for testing.
 {
@@ -305,21 +300,6 @@ static void Ms100Task(void)
     Param::SetInt(Param::tmpaux,IsaTemp);
 
     chargerClass::Send100msMessages(RunChg);
-
-    if(targetChgint == _interface::Chademo) //Chademo on CAN3
-    {
-     /*   
-       if(!DigIo::gp_12Vin.Get()) RunChaDeMo(); //if we detect chademo plug inserted off we go ...
-     */
-
-    }
-
-if(targetChgint != _interface::Chademo) //If we are not using Chademo then gp in can be used as a cabin heater request from the vehicle
-{
-   /*
-    Param::SetInt(Param::HeatReq,DigIo::gp_12Vin.Get());
-    */
-}
 
 }
 
@@ -687,24 +667,6 @@ extern "C" void tim3_isr(void)
     scheduler->Run();
 }
 
-
-extern "C" void exti15_10_isr(void)    //CAN3 MCP25625 interruppt
-{
-    uint32_t canData[2];
-   if(CANSPI_receive(&rxMessage))
-    {
-        canData[0]=(rxMessage.frame.data0 | rxMessage.frame.data1<<8 | rxMessage.frame.data2<<16 | rxMessage.frame.data3<<24);
-        canData[1]=(rxMessage.frame.data4 | rxMessage.frame.data5<<8 | rxMessage.frame.data6<<16 | rxMessage.frame.data7<<24);
-    }
-    //can cast this to uint32_t[2]. dont be an idiot! * pointer
-    CANSPI_CLR_IRQ();   //Clear Rx irqs in mcp25625
-    exti_reset_request(EXTI15); // clear irq
-
-    if(rxMessage.frame.id==0x108) ChaDeMo::Process108Message(canData);
-    if(rxMessage.frame.id==0x109) ChaDeMo::Process109Message(canData);
-  //DigIo::led_out.Toggle();
-}
-
 extern "C" void rtc_isr(void)
 {
 	/* The interrupt flag isn't cleared by hardware, we have to do it. */
@@ -745,12 +707,8 @@ extern "C" int main(void)
     term_Init();
     parm_load();
     spi2_setup();
-    spi3_setup();
     parm_Change(Param::PARAM_LAST);
     DigIo::inv_out.Clear();//inverter power off during bootup
-/*
-    DigIo::mcp_sby.Clear();//enable can3
-*/
 
     Can c(CAN1, (Can::baudrates)Param::GetInt(Param::canspeed));//can1 Inverter / isa shunt/LIM.
     Can c2(CAN2, (Can::baudrates)Param::GetInt(Param::canspeed));//can2 vehicle side.
